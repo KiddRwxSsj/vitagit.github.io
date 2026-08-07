@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="VitaGit — PlayStation Vita homebrew database">
+<title>VitaGit — Homebrew Database</title>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+<link rel="shortcut icon" href="assets/img/favicon.ico">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+<header>
+  <div class="wrap nav">
+    <a href="#home" data-view="home" aria-label="VitaGit home">
+      <img class="logo" id="siteLogo" src="https://raw.githubusercontent.com/KiddRwxSsj/vitagit-db/main/vitagitDBlogolletersnobglandscape2.png" alt="VitaGit Database">
+    </a>
+
+    <nav class="links" id="navLinksList">
+      <a href="#home" data-view="home">Home</a>
+      <a href="#browse" data-view="browse">Browse</a>
+      <a href="#categories" data-view="categories">Categories</a>
+      <a href="about.html">About</a>
+      <a href="https://github.com/KiddRwxSsj/vitagit-db" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Toggle dark mode"></button>
+      <a class="support" href="https://github.com/KiddRwxSsj/vitagit-db" target="_blank" rel="noopener">Support VitaGit</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="bottom-fade" id="bottomFade" aria-hidden="true"></div>
+
+<main>
+  <section id="homeView" class="home-view">
+    <section class="hero">
+      <div class="wrap">
+        <div class="kicker">PLAYSTATION VITA HOMEBREW</div>
+        <h1>The <span>Homebrew</span> Database<br>for PlayStation® Vita</h1>
+        <p>VitaGit is a curated collection of PS Vita homebrew apps, games and tools. Browse, discover and download VPKs directly from GitHub.</p>
+        <div class="buttons">
+          <a class="btn primary" href="#browse" data-view="browse">Browse All Apps</a>
+          <a class="btn secondary" href="https://github.com/KiddRwxSsj/vitagit-db" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap home-content">
+      <div class="stats-strip">
+        <div class="stat"><b id="homeCount">—</b><span>Apps</span></div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat"><b id="homeCatCount">—</b><span>Categories</span></div>
+        <div class="stat-note">Synced live from <a href="https://github.com/KiddRwxSsj/vitagit-db" target="_blank" rel="noopener">vitagit-db</a></div>
+      </div>
+
+      <div class="chip-row" id="homeCategories" aria-label="Browse by category"></div>
+
+      <div class="shelf">
+        <div class="shelf-head">
+          <h3>Recently Added</h3>
+          <button class="text-link" data-view="browse">See all</button>
+        </div>
+        <div class="shelf-track" id="shelfRecent"></div>
+      </div>
+
+      <div id="categoryShelves"></div>
+    </div>
+  </section>
+
+  <section id="categoriesView" class="categories-view">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">CATEGORIES</div>
+          <h2>Explore Vita homebrew</h2>
+          <p>Choose a category to browse the catalog.</p>
+        </div>
+      </div>
+      <div id="allCategories" class="all-category-grid"></div>
+    </div>
+  </section>
+
+  <section class="catalog wrap" id="catalog">
+    <div class="catalog-head">
+      <div class="catalog-title">
+        <small>THE LIBRARY</small>
+        <h2>Browse Homebrew</h2>
+        <div class="catalog-count" id="count">Loading database…</div>
+      </div>
+
+      <div class="controls">
+        <label class="search">
+          <span class="search-icon">Search</span>
+          <input id="search" type="search" placeholder="Search apps, games, tools…" autocomplete="off">
+        </label>
+        <select class="sort" id="sort" aria-label="Sort results">
+          <option value="name">Name (A–Z)</option>
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="filter active" data-type="all">All</button>
+      <button class="filter" data-type="game">Games</button>
+      <button class="filter" data-type="port">Ports</button>
+      <button class="filter" data-type="emulator">Emulators</button>
+      <button class="filter" data-type="utility">Utilities</button>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+
+<div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div class="modal-content">
+      <div class="modal-head">
+        <div class="modal-icon" id="modalIcon"></div>
+        <div class="modal-title">
+          <h2 id="modalTitle"></h2>
+          <div class="modal-author" id="modalAuthor"></div>
+          <div class="modal-version" id="modalVersion"></div>
+        </div>
+      </div>
+      <div class="modal-description" id="modalDescription"></div>
+      <div class="modal-meta" id="modalMeta"></div>
+      <div class="modal-actions">
+        <a class="action github" id="modalGithub" target="_blank" rel="noopener">GitHub</a>
+        <a class="action download" id="modalDownload" target="_blank" rel="noopener">Download</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>VitaGit Database · Homebrew metadata from the VitaGit catalog.</span>
+    <a href="https://github.com/KiddRwxSsj/vitagit-db" target="_blank" rel="noopener">View database on GitHub ↗</a>
+  </div>
+</footer>
+
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
