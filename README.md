@@ -1,6 +1,8 @@
 <p align="center">
-  <img src="./vitagitDBlogolletersnobglandscape.png" alt="VitaGit" width="500">
+  <img src="vitagitDBlogolletersnobglandscape.png" alt="VitaGit Logo" width="600"/>
 </p>
+
+---
 
 
 VitaGit is a web-based homebrew browser for the PlayStation Vita, designed to make finding and downloading applications as simple as possible.
