@@ -84,9 +84,11 @@ header {
   font-size: 14px;
   font-weight: 600;
 }
-.links a { height: 100%; display: flex; align-items: center; border-bottom: 2px solid transparent; }
+.links a { height: 100%; display: flex; align-items: center; gap: 7px; border-bottom: 2px solid transparent; }
 .links a:hover { color: var(--blue); }
 .links a.active { color: var(--blue); border-color: var(--blue); }
+
+.github-icon { width: 18px; height: 18px; display: block; }
 
 .support {
   background: var(--blue);
@@ -112,22 +114,11 @@ header {
   position: relative;
 }
 .theme-toggle:hover { color: var(--blue); border-color: var(--accent-border-soft); transform: translateY(-1px); }
-.theme-toggle::before {
-  content: "";
-  width: 13px; height: 13px;
-  border-radius: 50%;
-  border: 1.5px solid currentColor;
-  display: block;
-}
-.theme-toggle::after {
-  content: "";
-  position: absolute;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--bg-elevated);
-  top: 7px; right: 7px;
-}
-html[data-theme="dark"] .theme-toggle::before { box-shadow: 0 0 0 1px currentColor inset; }
+.theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
 .nav-toggle {
   display: none;
