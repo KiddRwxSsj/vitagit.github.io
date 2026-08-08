@@ -30,3 +30,7 @@ The initial database was based on the [VitaDB](https://vitadb.rinnegatamante.it/
 * [VitaDB](https://vitadb.rinnegatamante.it/)
 
 Homebrew applications, icons, metadata, and other assets remain the property of their respective authors.
+
+## AI Assistance
+
+Parts of the code were written or improved with the assistance of AI. All AI-assisted code was thoroughly reviewed, tested, and validated manually, with the overall implementation and debugging process remaining under human supervision.
