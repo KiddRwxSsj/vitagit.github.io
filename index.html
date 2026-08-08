@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="VitaGit — PlayStation Vita homebrew database">
-<title>VitaGit — Homebrew Database</title>
+<meta name="description" content="VitaGit: PlayStation Vita homebrew database">
+<title>VitaGit: Homebrew Database</title>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
@@ -53,24 +53,31 @@
     </section>
 
     <div class="wrap home-content">
+      <section class="spotlight" id="spotlight" aria-label="Latest release"></section>
+
       <div class="stats-strip">
-        <div class="stat"><b id="homeCount">—</b><span>Apps</span></div>
+        <div class="stat"><b id="homeCount">0</b><span>Apps</span></div>
         <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat"><b id="homeCatCount">—</b><span>Categories</span></div>
+        <div class="stat"><b id="homeCatCount">0</b><span>Categories</span></div>
         <div class="stat-note">Synced live from <a href="https://github.com/KiddRwxSsj/vitagit-db" target="_blank" rel="noopener">vitagit-db</a></div>
       </div>
 
-      <div class="chip-row" id="homeCategories" aria-label="Browse by category"></div>
-
-      <div class="shelf">
-        <div class="shelf-head">
-          <h3>Recently Added</h3>
-          <button class="text-link" data-view="browse">See all</button>
+      <section class="home-catalog">
+        <div class="home-catalog-head">
+          <h3>Browse the catalog</h3>
+          <div class="tab-bar" id="homeTabs" role="tablist" aria-label="Filter by category">
+            <button class="tab active" type="button" role="tab" aria-selected="true" data-type="all">All</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-type="port">Ports</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-type="game">Games</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-type="utility">Utilities</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-type="emulator">Emulators</button>
+          </div>
         </div>
-        <div class="shelf-track" id="shelfRecent"></div>
-      </div>
-
-      <div id="categoryShelves"></div>
+        <div class="home-grid" id="homeGrid"></div>
+        <div class="home-catalog-footer">
+          <button class="btn secondary" type="button" data-view="browse">Browse Full Catalog</button>
+        </div>
+      </section>
     </div>
   </section>
 
@@ -101,7 +108,7 @@
           <input id="search" type="search" placeholder="Search apps, games, tools…" autocomplete="off">
         </label>
         <select class="sort" id="sort" aria-label="Sort results">
-          <option value="name">Name (A–Z)</option>
+          <option value="name">Name (A-Z)</option>
           <option value="newest">Newest</option>
           <option value="oldest">Oldest</option>
         </select>

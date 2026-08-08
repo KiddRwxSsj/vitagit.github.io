@@ -1,9 +1,3 @@
-/* ==========================================================================
-   VitaGit — shared stylesheet
-   Used by index.html and about.html. Keep selectors generic enough that
-   pages without the catalog markup (about.html) simply don't match them.
-   ========================================================================== */
-
 :root {
   --blue: #115fee;
   --blue-hover: #0b52d4;
@@ -21,9 +15,7 @@
   --radius: 14px;
   --transition: cubic-bezier(.22, 1, .36, 1);
 
-  /* Derived from --blue/--line so they stay correct in both themes
-     without needing separate dark-mode overrides. */
-  --accent-border: color-mix(in srgb, var(--blue) 40%, var(--line));
+    --accent-border: color-mix(in srgb, var(--blue) 40%, var(--line));
   --accent-border-soft: color-mix(in srgb, var(--blue) 22%, var(--line));
   --tag-bg: color-mix(in srgb, var(--blue) 10%, var(--card));
   --tag-border: color-mix(in srgb, var(--blue) 28%, var(--card));
@@ -55,8 +47,6 @@ body {
   color: var(--ink);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
-/* Push the footer to the bottom of the viewport even when a view (like
-   Categories) doesn't have enough content to fill the page on its own. */
 main { flex: 1 0 auto; }
 footer { flex-shrink: 0; }
 a, button, input, select {
@@ -66,7 +56,6 @@ a, button, input, select, .card, .btn, .filter, .action, .support, .modal, .sear
   transition: background-color .16s ease, border-color .16s ease, color .16s ease,
               box-shadow .16s ease, transform .22s var(--transition), opacity .16s ease;
 }
-/* Suspend transitions during a theme swap so nothing "flashes" between colors. */
 html.theme-switching *, html.theme-switching *::before, html.theme-switching *::after {
   transition: none !important;
 }
@@ -74,7 +63,6 @@ a { text-decoration: none; color: inherit; }
 
 .wrap { max-width: 1380px; margin: auto; padding: 0 34px; }
 
-/* ---------- header / nav ---------- */
 header {
   height: 78px;
   background: color-mix(in srgb, var(--card) 91%, transparent);
@@ -165,7 +153,6 @@ html[data-theme="dark"] .theme-toggle::before { box-shadow: 0 0 0 1px currentCol
 .nav-toggle span::before { top: -7px; }
 .nav-toggle span::after { top: 7px; }
 
-/* ---------- hero ---------- */
 .hero {
   background: var(--card);
   padding: 70px 0 65px;
@@ -196,7 +183,6 @@ h1 span { color: var(--blue); }
 .btn.secondary { background: var(--card-hover); color: var(--ink); }
 .btn:hover { transform: translateY(-1px); }
 
-/* ---------- catalog head / controls ---------- */
 .catalog { padding: 45px 0 110px; }
 .catalog-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 25px; margin-bottom: 25px; }
 .catalog-title small { color: var(--blue); font-weight: 800; letter-spacing: .14em; font-size: 11px; }
@@ -241,7 +227,6 @@ h1 span { color: var(--blue); }
 .filter:hover { border-color: var(--accent-border-soft); color: var(--blue); }
 .filter.active { background: var(--blue); color: #fff; border-color: var(--blue); }
 
-/* ---------- cards ---------- */
 .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .card {
   background: var(--card);
@@ -255,8 +240,8 @@ h1 span { color: var(--blue); }
   animation: cardIn .55s var(--transition) both;
   animation-delay: calc(var(--i, 0) * 18ms);
 }
-.card:hover { transform: translateY(-7px) scale(1.008); border-color: var(--accent-border-soft); box-shadow: var(--shadow-hover); background: var(--card-hover); }
-.card:active { transform: translateY(-3px) scale(.998); }
+.card:hover { transform: translateY(-6px); border-color: var(--accent-border-soft); box-shadow: var(--shadow-hover); background: var(--card-hover); }
+.card:active { transform: translateY(-2px); }
 @keyframes cardIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
 .card-top { display: flex; align-items: center; gap: 13px; min-width: 0; }
@@ -293,10 +278,11 @@ h1 span { color: var(--blue); }
   background: var(--tag-bg);
   border: 1px solid var(--tag-border);
   border-radius: 6px;
-  padding: 4px 7px;
+  padding: 4px 8px;
   font-size: 10px;
   font-weight: 800;
-  text-transform: capitalize;
+  letter-spacing: .05em;
+  text-transform: uppercase;
 }
 .version { color: var(--soft); font-size: 11px; }
 .card-actions { margin-left: auto; display: flex; gap: 6px; }
@@ -318,7 +304,6 @@ footer {
 .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
 .footer-inner a { color: var(--blue); font-weight: 600; }
 
-/* ---------- app details modal ---------- */
 .modal-backdrop {
   position: fixed; inset: 0; z-index: 100;
   display: flex; align-items: center; justify-content: center;
@@ -394,7 +379,6 @@ footer {
 }
 .bottom-fade.hidden { opacity: 0; }
 
-/* ---------- page views (home / browse / categories) ---------- */
 #catalog, .home-view, .categories-view { display: none; }
 .view-active { display: block !important; animation: viewEnter .34s cubic-bezier(.22, 1, .36, 1) both; }
 @keyframes viewEnter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -405,15 +389,55 @@ footer {
 .text-link { border: 0; background: none; color: var(--blue); font-weight: 750; font-size: 13px; cursor: pointer; padding: 7px 0; }
 .text-link:hover { transform: translateX(3px); }
 
-/* Quick-glance strip: replaces the old oversized "discover" banner with a
-   single compact line of real numbers, so the page doesn't repeat the
-   hero's pitch a second time right below it. */
+.spotlight {
+  display: flex;
+  gap: 26px;
+  align-items: center;
+  margin: 40px 0 28px;
+  padding: 30px;
+  border: 1px solid var(--accent-border-soft);
+  border-radius: 20px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--blue) 7%, var(--card)), var(--card) 65%);
+  box-shadow: var(--shadow-hover);
+}
+.spotlight-icon {
+  width: 108px; height: 108px;
+  flex: none;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--bg-elevated);
+  display: grid; place-items: center;
+  color: var(--blue);
+  font-weight: 900;
+  font-size: 38px;
+  box-shadow: 0 10px 26px rgba(17, 95, 238, .18);
+}
+.spotlight-icon img { width: 100%; height: 100%; object-fit: cover; }
+.spotlight-body { min-width: 0; }
+.spotlight-label { display: block; color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px; }
+.spotlight-title { margin: 0 0 8px; font-size: 26px; letter-spacing: -.03em; }
+.spotlight-desc {
+  color: var(--soft);
+  font-size: 14px;
+  line-height: 1.65;
+  margin: 0 0 16px;
+  max-width: 640px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+.spotlight-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+.spotlight-author, .spotlight-date { color: var(--soft); font-size: 12.5px; font-weight: 600; }
+.spotlight-actions { display: flex; gap: 10px; }
+
 .stats-strip {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 22px;
-  margin: 40px 0 28px;
+  margin: 0 0 40px;
   padding: 16px 22px;
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -427,57 +451,48 @@ footer {
 .stat-note { margin-left: auto; font-size: 12px; color: var(--soft); }
 .stat-note a { color: var(--blue); font-weight: 600; }
 
-/* Category chips: a compact, scannable row instead of four large tiles. */
-.chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
-.chip {
+.home-catalog-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+.home-catalog-head h3 { margin: 0; font-size: 20px; letter-spacing: -.03em; }
+
+.tab-bar {
   display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: var(--input);
-  color: var(--soft);
+  gap: 4px;
+  padding: 4px;
   border: 1px solid var(--line);
-  padding: 8px 14px;
-  border-radius: 20px;
+  border-radius: 12px;
+  background: var(--bg-elevated);
+}
+.tab {
+  border: 0;
+  background: transparent;
+  color: var(--soft);
+  padding: 8px 15px;
+  border-radius: 9px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
 }
-.chip:hover { border-color: var(--accent-border-soft); color: var(--blue); }
-.chip-count {
-  background: var(--bg-elevated);
-  color: var(--muted);
-  border-radius: 10px;
-  padding: 1px 7px;
-  font-size: 11px;
-  font-weight: 700;
-}
-.chip:hover .chip-count { color: var(--blue); }
+.tab:hover { color: var(--blue); }
+.tab.active { background: var(--blue); color: #fff; box-shadow: 0 6px 16px rgba(17, 95, 238, .28); }
 
-/* Storefront shelves: horizontally scrolling rows of compact cards so the
-   home page can surface far more apps than a static grid without growing
-   the page length. */
-.shelf { margin-bottom: 38px; }
-.shelf-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; gap: 16px; }
-.shelf-head h3 { margin: 0; font-size: 18px; letter-spacing: -.02em; }
-.shelf-track {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  scroll-snap-type: x proximity;
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  min-height: 120px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .18s ease, transform .18s ease;
 }
-.shelf-track::-webkit-scrollbar { height: 6px; }
-.shelf-track::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
-.shelf-track .card { flex: 0 0 200px; scroll-snap-align: start; }
+.home-grid.is-switching { opacity: 0; transform: translateY(6px); }
 
-/* Compact card variant used on shelves — smaller icon, no description or
-   action buttons, since the point is quick scanning; a click opens the
-   same modal as the full catalog card. */
-.card-compact { padding: 13px; }
-.card-compact .icon { width: 46px; height: 46px; border-radius: 10px; font-size: 17px; }
+.home-catalog-footer { display: flex; justify-content: center; margin-top: 28px; }
+
+.card-compact { padding: 15px; }
+.card-compact .icon { width: 60px; height: 60px; border-radius: 12px; font-size: 22px; }
 .card-compact h3 { font-size: 14px; }
 .card-compact .author { font-size: 11px; }
-.card-compact .card-bottom { margin-top: 10px; }
+.card-compact .card-bottom { margin-top: 11px; }
 
 .all-category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 40px 0 100px; }
 .all-category {
@@ -496,7 +511,6 @@ footer {
 .all-category span { display: block; color: var(--soft); font-size: 11px; margin-top: 5px; }
 .categories-view .section-head { padding-top: 55px; }
 
-/* ---------- about page ---------- */
 .about-hero { padding: 75px 0 20px; }
 .about-lead { max-width: 760px; color: var(--soft); font-size: 17px; line-height: 1.75; }
 .panel {
@@ -514,15 +528,9 @@ footer {
 .panel a { color: var(--blue); font-weight: 700; }
 main.about-main { padding-bottom: 90px; }
 
-/* ==========================================================================
-   Responsive
-   ========================================================================== */
 @media (max-width: 1100px) {
   .grid { grid-template-columns: repeat(3, 1fr); }
   .links { gap: 18px; }
-}
-@media (max-width: 900px) {
-  .shelf-track .card { flex-basis: 180px; }
 }
 @media (max-width: 800px) {
   .wrap { padding: 0 18px; }
@@ -552,11 +560,15 @@ main.about-main { padding-bottom: 90px; }
   .controls { width: 100%; }
   .search { flex: 1; width: auto; }
   .grid { grid-template-columns: repeat(2, 1fr); }
+  .spotlight { flex-direction: column; align-items: flex-start; padding: 24px; }
+  .spotlight-icon { width: 84px; height: 84px; font-size: 30px; }
+  .tab-bar { display: flex; flex-wrap: wrap; width: 100%; }
+  .tab { flex: 1 1 auto; text-align: center; }
 }
 @media (max-width: 620px) {
   .all-category-grid { grid-template-columns: 1fr 1fr; }
   .stat-note { margin-left: 0; width: 100%; }
-  .shelf-track .card { flex-basis: 160px; }
+  .home-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
 }
 @media (max-width: 520px) {
   .modal-content { padding: 22px; }
